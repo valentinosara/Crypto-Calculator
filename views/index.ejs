@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculate Crypto Investment</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+    />
+  </head>
+  <body>
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="left-side">
+        <div class="title-subtitle">
+          <h1 class="hero-title">Patossny</h1>
+          <h4 class="hero-subtitle">kssssssssssssssssss</h4>
+        </div>
+        <div class="button-box">
+          <button class="hero-button">Try It</button>
+        </div>
+      </div>
+      <div class="visual-part">
+        <img class="crypto-img" src="images/visual-crypto.jpg" alt="" />
+      </div>
+    </section>
+    <!-- CALC SECTION -->
+    <section class="calc-section">
+      <h2>Calculate Your Investment</h2>
+      <form action="/calculate" method="post">
+        <label for="crypto-id">Type the crypto ID</label>
+        <input id="crypto-id" name="cryptoId">
+
+        <label for="amount">USD</label>
+        <input
+          type="number"
+          id="amount"
+          name="amount"
+          placeholder="USD amount"
+          required
+        />
+
+        <label for="date">Investment Date</label>
+        <input type="date" id="date" name="date" required />
+
+        <button type="submit">Calculate</button>
+      </form>
+    </section>
+    <!-- LIST SECTION -->
+    <section class="list-section">
+      <table>
+        <thead>
+          <tr class="head-row">
+            <td id="number-place">#</td>
+            <td id="coin-place">Coin</td>
+            <td class="id-place">Id</td>
+            <td class="price-place">Price</td>
+            <td class="24h">24h</td>
+            <td class="listing-date">Listing Date</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% cryptoArray.forEach(coinObjetc => { %>
+          <tr class="list-row">
+            <td id="list-number"><%= coinObjetc.market_cap_rank %></td>
+            <td id="list-box-1">
+              <a
+                href="https://www.coingecko.com/en/coins/<%= coinObjetc.id %>"
+                class="coin-links"
+              >
+                <img
+                  class="icons"
+                  src="<%= coinObjetc.image %>"
+                  alt="<%= coinObjetc.name %>"
+                />
+                <div class="name-symbol">
+                  <p class="coin-name"><%= coinObjetc.name %></p>
+                  <p class="coin-symbol">
+                    <%= coinObjetc.symbol.toUpperCase() %>
+                  </p>
+                </div>
+              </a>
+            </td>
+            <td class="list-id">"<%= coinObjetc.id %>"</td>
+            <td class="list-price">
+              $<%= coinObjetc.current_price.toLocaleString('en-US', {
+              minimumFractionDigits: 2, maximumFractionDigits: 10 }) %>
+            </td>
+            <td
+              class="list-24h <%= coinObjetc.price_change_percentage_24h_in_currency < 0 ? 'negative' : '' %>"
+            >
+              <%= coinObjetc.price_change_percentage_24h_in_currency.toFixed(2)
+              %>%
+            </td>
+            <td class="list-listing">
+              <%= new Date(coinObjetc.atl_date).toLocaleDateString('en-US', {
+              year: 'numeric', month: 'numeric', day: 'numeric' }) %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+  </body>
+</html>
