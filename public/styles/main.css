@@ -5,98 +5,172 @@
   /* border: solid black 0.5px; */
 }
 body{
-  padding: 40px;
+  padding: 0px 40px;
+  background-color: #040303;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
 }
 /* HERO SECTION */
 .hero-section {
+  height: fit-content;
+  width: 100%;
   display: flex;
-  height: 600px;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
+  padding: 120px 0px;
 
   .left-side {
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 30px;
 
     .title-subtitle {
       .hero-title {
-        font-size: 120px;
-        color: black;
+        font-size: 68px;
+        font-weight: 400;
+        font-family: "poppins";
+        color: #EDEDED;
+        line-height: 80px;
+        margin-bottom: 15px;
+        #investment{
+          color: #F8DE22;
+        }
       }
       .hero-subtitle {
-        font-size: 35px;
+        font-size: 18px;
+        font-weight: 200;
+        font-family: 'nunito', sans-serif;
+        color: #EDEDED;
       }
     }
     .hero-button {
-      width: 150px;
-      height: 50px;
-      font-size: 25px;
+      background-color: #F8DE22;
+      border-radius: 15px;
+      border: none;
+      width: 120px;
+      height: 40px;
+      font-family: 'nunito', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .hero-button:hover{
+      background-color: #d4bf1e;
     }
   }
-
   .visual-part {
-    width: fit-content;
+    width: 45%;
     height: fit-content;
-    padding: 20px;
-
     .crypto-img {
-      width: 200px;
+      width: 100%;
+      border-radius: 35px;
     }
   }
 }
 /* CALC SECTION */
-
-/* Agrega estos estilos a tu hoja de estilo CSS */
-
 .calc-section {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.calc-section h2 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-form {
-  display: grid;
-  gap: 10px;
-}
-
-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
-}
-
-input {
   width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 14px;
+  height: fit-content;
+  padding: 50px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  border-radius: 40px 40px 0px 0px;
+  background: linear-gradient(to bottom, #0F0F0F, #040303);
+}
+.calculator-part {
+  width: 90%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+
+  .calc-title{
+    font-size: 30px;
+    color: #EDEDED;
+    font-family: "poppins";
+    font-weight: 400;
+    #investment{
+      color: #F8DE22;
+    }
+  }
+  form {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: end;
+    gap: 30px;
+    
+    .form-item{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: fit-content;
+      width: 100%;
+    }
+    label{
+      color: #EDEDED;
+      font-family: 'nunito', sans-serif;
+      font-size: 18px;
+      margin-right: 5px;
+    }
+    input {
+      width: 100%;
+      color: #040303;
+      font-size: 16px;
+      font-family: 'nunito', sans-serif;
+      font-weight: 600;
+      border: none;
+      padding: 8px;
+      border-radius: 8px;
+    }
+    .calc-button {
+      height: fit-content;
+      width: fit-content;
+      background-color: #F8DE22;  
+      color: #040303;
+      font-family: 'nunito', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 20px;  
+      border: none;  
+      border-radius: 8px;  
+      cursor: pointer;
+    }
+  }
 }
 
-button {
-  padding: 10px;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
+/* CALC RESULT STYLES */
+.calc-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+.first-part {
+  color: #EDEDED;
+  font-size: 24px;
+  font-family: "poppins";
+  font-weight: 400;
+  #money{
+    color: #F8DE22;
+  }
+}
+.second-part {
+  color: #EDEDED85;
   font-size: 16px;
-}
-
-button:hover {
-  background-color: #297fb8;
+  font-family:  'nunito', sans-serif;
+  font-weight: 300;
 }
 
 
@@ -105,9 +179,16 @@ button:hover {
   width: 100%;
   height: fit-content;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  margin-top: 20px;
+  align-items: flex-start;
+  margin: 50px 0px;
+  .list-title{
+    color: #EDEDED;
+    font-family: "poppins";
+    font-weight: 400;
+    font-size: 20px;
+    margin-left: 30px;
+  }
 }
 table {
   table-layout: fixed;
@@ -115,18 +196,18 @@ table {
   border-collapse: collapse;
   margin-top: 10px;
   border-bottom: 1px solid #ddd;
-
 }
 
 /* LIST HEAD PART */
 .head-row td {
   padding: 15px 30px 15px 0px;
-  font-weight: 700;
+  font-weight: 400;
   text-align: end;
   font-family: 'nunito', sans-serif;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
-  font-size: 18px;
+  color: #EDEDED;
+  border-bottom: 1px solid #0a0808;
+  border-top: 1px solid #0a0808;
+  font-size: 16px;
 }
 #number-place{
   width: 100px;
@@ -139,10 +220,10 @@ table {
 
 /* LIST BODY PART */
 .list-row {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #0a0808;
 }
 .list-row:hover {
-  background-color: #f5f5f5;
+  background-color: #1b1717;
 }
 .list-row td {
   padding: 20px 30px 20px 0px;
@@ -150,6 +231,7 @@ table {
 }
 #list-number{
   text-align: center;
+  color: #EDEDED;
 }
 .coin-links{
   text-decoration: none;
@@ -173,9 +255,9 @@ table {
   gap: 5px;
 }
 .coin-name {
-  font-weight: bold;
+  font-weight: 550;
   font-family: "nunito", sans-serif;
-  color: black;
+  color: #EDEDED;
 }
 .coin-symbol {
   color: #666;
@@ -186,9 +268,10 @@ table {
 .list-id {
   font-family: "nunito", sans-serif;
   font-size: 16px;
+  color: #EDEDED;
 }
-.list-price {
-  color: black;
+.list-price{
+  color: #EDEDED;
 }
 .list-24h {
   color: green;
@@ -197,10 +280,131 @@ table {
   color: red;
 }
 #list-number, .list-price, .list-24h{
-  border-radius: 5px;
   font-family: 'Roboto', sans-serif;
 }
 .list-listing {
   font-family: "nunito", sans-serif;
   color: #999;
 }
+
+/* TABLET CSS */
+@media (max-width: 1199px) {
+  .hero-section {
+    padding: 60px 0px;
+    gap: 20px;
+  }
+  .hero-title {
+    font-size: 50px;
+    line-height: 75px;
+  }
+  .visual-part .crypto-img {
+    width: 100%;
+  }
+  .calc-section {
+    padding: 20px 0;
+  }
+  .calc-title {
+    font-size: 24px;
+  }
+  form {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    gap: 15px;
+
+    .form-item{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: fit-content;
+      width: 100%;
+    }
+    label, input {
+      width: 100%;
+    }
+    .calc-button {
+      width: auto;
+    }
+  }
+}
+
+@media (max-width: 890px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 60px 0;
+
+    .left-side {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      .hero-title {
+        font-size: 40px;
+        text-align: center;
+      }
+      .hero-subtitle{
+        text-align: center;
+      }
+    }
+    .visual-part {
+      width: 90%;
+      height: fit-content;
+      text-align: center;
+      .crypto-img {
+        width: 60%;
+        border-radius: 35px;
+
+      }
+    }
+  }
+
+  .calc-section {
+    padding: 30px 0;
+    .calc-title {
+      font-size: 25px;
+    }
+    form{
+      flex-direction: column;
+      align-items: center;
+      .form-item{
+        align-items: center;
+        width: 60%;
+        gap: 10px;
+
+        label{
+          text-align: center;
+        }
+      }
+    }
+    .first-part {    
+      font-size: 18px;
+    }
+    .second-part {    
+      font-size: 15px;
+    }
+  }
+
+  table {
+    font-size: 15px;
+    .head-row td {
+      padding: 15px 0px;
+      text-align: end;
+      color: #EDEDED;
+    }
+    #number-place{
+      width: 75px;
+    }
+    #coin-place{
+      width: 220px;
+    }
+    .list-row td {
+      padding: 20px 0px;
+      text-align: end;
+    }
+  }
+  .list-title {
+    font-size: 18px;
+  }
+}
+

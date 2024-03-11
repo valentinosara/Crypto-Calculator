@@ -94,7 +94,8 @@ app.post("/calculate", async (req, res) => {
         const initialInvestment = formatCurrency(initialInvestmentValue);
 
         console.log(initialInvestment, coinDatePrice, initialCoinsAmount, actualInvestment);
-        res.render("index.ejs", {cryptoArray, selectedCoin, initialInvestment, investmentDate, coinDatePrice, initialCoinsAmount, actualInvestment})
+       
+        res.render("index.ejs", {cryptoArray, selectedCoin, initialInvestment, investmentDate, coinDatePrice, initialCoinsAmount, actualInvestment});
     } catch (error) {
         console.error(error);
         res.status(500).send("Error in the Server");        
