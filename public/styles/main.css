@@ -286,6 +286,21 @@ table {
   font-family: "nunito", sans-serif;
   color: #999;
 }
+.footer{
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.footer *{
+  color: #666;
+  font-weight: 400;
+  font-family: 'nunito', sans-serif;
+  font-size: 15px;
+}
 
 /* TABLET CSS */
 @media (max-width: 1199px) {
