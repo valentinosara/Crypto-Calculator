@@ -46,28 +46,38 @@
         <img class="crypto-img" src="images/visual-crypto.jpg" alt="" />
       </div>
     </section>
+
     <!-- CALC SECTION -->
     <section class="calc-section">
-      <h2>Calculate Your Investment</h2>
-      <form action="/calculate" method="post">
-        <label for="crypto-id">Type the crypto ID</label>
-        <input id="crypto-id" name="cryptoId">
+      <section class="calculator-part">
+        <h2>Calculate Your Investment</h2>
+        <form action="/calculate" method="post">
+          <label for="crypto-id">Type the crypto ID</label>
+          <input id="crypto-id" name="cryptoId" />
 
-        <label for="amount">USD</label>
-        <input
-          type="number"
-          id="amount"
-          name="amount"
-          placeholder="USD amount"
-          required
-        />
+          <label for="amount">USD</label>
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            placeholder="USD amount"
+            required
+          />
 
-        <label for="date">Investment Date</label>
-        <input type="date" id="date" name="date" required />
+          <label for="date">Investment Date</label>
+          <input type="date" id="date" name="date" required />
 
-        <button type="submit">Calculate</button>
-      </form>
+          <button type="submit">Calculate</button>
+        </form>
+      </section>
+      <% if(locals.selectedCoin) {%>
+      <section class="calc-result">
+        <div class="first-part">Current Capital = <%= actualInvestment %></div>
+        <div class="second-part">If you had invested <%= initialInvestment %> in <%= selectedCoin %> on <%= investmentDate %>, you capital would be <%= actualInvestment %> today</div>
+      </section>
+      <% }; %>
     </section>
+
     <!-- LIST SECTION -->
     <section class="list-section">
       <table>
