@@ -5,6 +5,7 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 const API_URL = "https://api.coingecko.com/api/v3";
+let postData = {};
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -30,7 +31,6 @@ async function getCryptoList() {
         throw error;
       }
 }
-
 async function getCoinPriceAtDate(coinId, date) {
     const historyData = await axios.get(`${API_URL}/coins/${coinId}/history`, {
       params: {
@@ -40,12 +40,10 @@ async function getCoinPriceAtDate(coinId, date) {
     const coinPrice = historyData.data.market_data.current_price.usd;
     return coinPrice;
 }
-
 function formatDate(inputDate) {
     const dateParts = inputDate.split("-");
     return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
 }
-
 // FUNCTION TO SHOW DECIMALS ONLY IF THEY EXISTS
 function formatCurrency(value) {
     const formattedValue = value.toLocaleString('en-US', {
@@ -59,7 +57,17 @@ function formatCurrency(value) {
 app.get("/", async (req, res) => {
     try {
         const cryptoArray = await getCryptoList();
-        res.render("index.ejs", {cryptoArray});
+        if(postData.selectedCoin){
+            let selectedCoinActualPrice = cryptoArray.find(crypto => crypto.id === postData.selectedCoin).current_price;
+            if (!selectedCoinActualPrice) {
+                throw new Error("The selected cryptocurrency is not in the list");        
+            }
+            const rawActualInvestment = postData.initialCoinsAmount * selectedCoinActualPrice;
+            const actualInvestment = formatCurrency(rawActualInvestment);          
+            res.render("index.ejs", {cryptoArray : cryptoArray, selectedCoin : postData.selectedCoin, initialInvestment: postData.initialInvestment, investmentDate : postData.investmentDate, initialCoinsAmount : postData.initialCoinsAmount, actualInvestment});
+        }else{        
+            res.render("index.ejs", {cryptoArray});    
+        }
     } catch (error) {
         console.error("Failed to make request:", error.message);
         res.render("index.ejs", {
@@ -68,39 +76,24 @@ app.get("/", async (req, res) => {
     }
 });
 app.post("/calculate", async (req, res) => {
-    const selectedCoin = req.body.cryptoId;
+    // USER REQ DATA
+    postData.selectedCoin = req.body.cryptoId;
     const rawInitialInvestment = req.body.amount;
-    const investmentDate = formatDate(req.body.date);
+    postData.investmentDate = formatDate(req.body.date);
     try {
-        const cryptoArray = await getCryptoList();
-        const rawCoinDatePrice = await getCoinPriceAtDate(selectedCoin, investmentDate);
-        const coinDatePrice = rawCoinDatePrice.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        })
-        const selectedCoinActualPrice = cryptoArray.find(crypto => crypto.id === selectedCoin).current_price;
-        
-        if (!selectedCoinActualPrice) {
-            throw new Error("The selected cryptocurrency is not in the list");
-        }
+        const CoinDatePrice = await getCoinPriceAtDate(postData.selectedCoin, postData.investmentDate);
         // CALCULATIONS
-        const initialCoinsAmount = rawInitialInvestment / rawCoinDatePrice;
-        const rawActualInvestment = initialCoinsAmount * selectedCoinActualPrice;
-        
-
+        postData.initialCoinsAmount = rawInitialInvestment / CoinDatePrice;
         // CONVERTING PRICE CONFIG
-        const actualInvestment = formatCurrency(rawActualInvestment)
         const initialInvestmentValue = parseFloat(rawInitialInvestment);
-        const initialInvestment = formatCurrency(initialInvestmentValue);
-
-        console.log(initialInvestment, coinDatePrice, initialCoinsAmount, actualInvestment);
-       
-        res.render("index.ejs", {cryptoArray, selectedCoin, initialInvestment, investmentDate, coinDatePrice, initialCoinsAmount, actualInvestment});
+        postData.initialInvestment = formatCurrency(initialInvestmentValue);
+        res.redirect("/");
     } catch (error) {
         console.error(error);
         res.status(500).send("Error in the Server");        
     }
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
