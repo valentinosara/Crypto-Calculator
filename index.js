@@ -64,7 +64,7 @@ app.get("/", async (req, res) => {
             }
             const rawActualInvestment = postData.initialCoinsAmount * selectedCoinActualPrice;
             const actualInvestment = formatCurrency(rawActualInvestment);          
-            res.render("index.ejs", {cryptoArray : cryptoArray, selectedCoin : postData.selectedCoin, initialInvestment: postData.initialInvestment, investmentDate : postData.investmentDate, initialCoinsAmount : postData.initialCoinsAmount, actualInvestment});
+            res.render("index.ejs", {cryptoArray : cryptoArray, selectedCoin : postData.selectedCoin, initialInvestment: postData.initialInvestment, investmentDate : postData.investmentDate, actualInvestment});
         }else{        
             res.render("index.ejs", {cryptoArray});    
         }
